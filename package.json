@@ -1,0 +1,23 @@
+{
+  "name": "demo-encrypt-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gary-jipp/demo-encrypt-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gary-jipp/demo-encrypt-node/issues"
+  },
+  "homepage": "https://github.com/gary-jipp/demo-encrypt-node#readme",
+  "dependencies": {
+    "jwk-to-pem": "^2.0.5",
+    "node-rsa": "^1.1.1"
+  }
+}
