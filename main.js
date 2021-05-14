@@ -17,10 +17,10 @@ console.log("\nReading token header");
 const hdr = Buffer.from(token.split('.')[0], 'base64').toString();
 console.log(hdr);
 
-var payload = Buffer.from(token.split('.')[1], 'base64');
+const base64Url = token.split('.')[1];
+var base64 = base64Url.replace('-', '+').replace('_', '/');
+var payload = Buffer.from(base64, 'base64');
 // console.log(payload.toString());
-
-var base64 = payload.replace('-', '+').replace('_', '/')
 
 const NodeRSA = require('node-rsa');
 
@@ -28,8 +28,8 @@ console.log("\nLoading RSA key pair");
 const private = new NodeRSA();
 private.importKey(privatePem, 'pkcs8');
 
-const pk = private.exportKey('pkcs8-public-pem');
-console.log(pk);
+// const pk = private.exportKey('pkcs8-public-pem');
+// console.log(pk);
 
 console.log("encrypting");
 const enc = private.encrypt("Test 123");
@@ -38,5 +38,5 @@ console.log("decrypting");
 const data = private.decrypt(enc);
 console.log(data.toString());
 
-// const dd = private.decrypt(payload);
+const dd = private.decrypt(payload);
 
