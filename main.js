@@ -20,6 +20,8 @@ console.log(hdr);
 var payload = Buffer.from(token.split('.')[1], 'base64');
 // console.log(payload.toString());
 
+var base64 = payload.replace('-', '+').replace('_', '/')
+
 const NodeRSA = require('node-rsa');
 
 console.log("\nLoading RSA key pair");
