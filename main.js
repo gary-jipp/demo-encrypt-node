@@ -29,16 +29,15 @@ console.log(hdr);
 //   console.log("\n\n", decoded);
 // }
 
-console.log("\nDecrypt token payload");
-const payload = Buffer.from(token[3], 'base64');
-
+// console.log("\nDecrypt token payload");
+// const payload = Buffer.from(token[3], 'base64');
 // const dd = key.decrypt(payload);
-
-// process.exit();
 
 const testPayload = "Test 123";
 console.log("encrypting: ", testPayload);
 const enc = key.encrypt(testPayload);
 
-console.log("decrypting");
+console.log(enc.toString('base64'));
+
+console.log("\ndecrypting...");
 console.log(key.decrypt(enc).toString());
