@@ -24,20 +24,22 @@ console.log("\nReading token header");
 const hdr = Buffer.from(token[0], 'base64').toString();
 console.log(hdr);
 
-// for (const part of token) {
-//   var decoded = Buffer.from(part, 'base64');
-//   console.log("\n\n", decoded);
-// }
+console.log("\Read token payload");
+console.log(token[1]);
+let payload = Buffer.from(token[1], 'base64');
+// console.log(payload.toString());
 
-// console.log("\nDecrypt token payload");
-// const payload = Buffer.from(token[3], 'base64');
-// const dd = key.decrypt(payload);
+
+console.log("\nRead signature");
+ const sig = Buffer.from(token[2], 'base64');
+ console.log(sig.toString());
+
 
 const testPayload = "Test 123";
 console.log("encrypting: ", testPayload);
 const enc = key.encrypt(testPayload);
 
-console.log(enc.toString('base64'));
+// console.log(enc.toString('base64'));
 
 console.log("\ndecrypting...");
 console.log(key.decrypt(enc).toString());
