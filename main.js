@@ -24,11 +24,13 @@ console.log("\nReading token header");
 const hdr = Buffer.from(token[0], 'base64').toString();
 console.log(hdr);
 
-console.log("\Read token payload");
+console.log("\nRead token payload");
 console.log(token[1]);
 let payload = Buffer.from(token[1], 'base64');
 // console.log(payload.toString());
 
+console.log("\nDecrypt payload");
+key.decrypt(payload)
 
 console.log("\nRead signature");
  const sig = Buffer.from(token[2], 'base64');
