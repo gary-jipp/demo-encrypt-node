@@ -1,7 +1,7 @@
 const fs = require('fs');
 const NodeRSA = require('node-rsa');
 const jwkToPem = require("jwk-to-pem");
-const  { jwkPrivate } = require("./jwks");
+const { jwkPrivate } = require("./jwks");
 
 // Private jwks contains both keys
 console.log("Reading key pair from Private JWKS");
@@ -24,17 +24,19 @@ console.log("\nReading token header");
 const hdr = Buffer.from(token[0], 'base64').toString();
 console.log(hdr);
 
+// {Pa}
 console.log("\nRead token payload");
 console.log(token[1]);
+const base64 = token[1].replace(/-/g, '+').replace(/_/g, '/');
 let payload = Buffer.from(token[1], 'base64');
 // console.log(payload.toString());
 
 console.log("\nDecrypt payload");
-key.decrypt(payload)
+key.decrypt(payload);
 
 console.log("\nRead signature");
- const sig = Buffer.from(token[2], 'base64');
- console.log(sig.toString());
+const sig = Buffer.from(token[2], 'base64');
+console.log(sig.toString());
 
 
 const testPayload = "Test 123";

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/gary-jipp/demo-encrypt-node#readme",
   "dependencies": {
+    "jose": "^3.12.1",
     "jwk-to-pem": "^2.0.5",
     "node-rsa": "^1.1.1"
   }
