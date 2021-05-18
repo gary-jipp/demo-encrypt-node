@@ -1,11 +1,12 @@
 const fs = require('fs');
-const { jwk } = require("./jwkPrivate");
+// const { jwk } = require("./jwkPrivate");
 const { decrypt_jwt, getJwk } = require('./decrypt');
 
 // Read encrypted payload
 const userinfo = fs.readFileSync('userinfo.txt');
 // console.log(userinfo.toString());
 
+// Read base64 jwk keypair
 const text = fs.readFileSync('jwkPrivate.txt', 'utf8');
 // console.log(text);
 const json = Buffer.from(text, 'base64');
