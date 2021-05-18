@@ -1,7 +1,7 @@
 const fs = require('fs');
 const jose = require('node-jose');
 const jwt_decode = require("jwt-decode");
-const { jwk } = require("./jwk");
+const { jwk } = require("./jwkPrivate");
 
 // Read encrypted payload
 const userinfo = fs.readFileSync('userinfo.txt');
