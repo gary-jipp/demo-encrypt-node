@@ -31,9 +31,6 @@ const base64 = token[1].replace(/-/g, '+').replace(/_/g, '/');
 let payload = Buffer.from(token[1], 'base64');
 // console.log(payload.toString());
 
-console.log("\nDecrypt payload");
-key.decrypt(payload);
-
 console.log("\nRead signature");
 const sig = Buffer.from(token[2], 'base64');
 console.log(sig.toString());
