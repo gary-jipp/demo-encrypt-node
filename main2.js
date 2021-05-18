@@ -31,7 +31,7 @@ jose.JWK.asKey(jwk).
   }).then(token => {
     // console.log(token);
 
-    var decoded = jwt_decode(token);
+    const decoded = jwt_decode(token);
 
     console.log(decoded);
     console.log(decoded.given_name);
