@@ -32,4 +32,5 @@ jose.JWK.asKey(jwkPrivate).
     var decoded = jwt_decode(token);
 
     console.log(decoded);
+    console.log(decoded.given_name);
   });
