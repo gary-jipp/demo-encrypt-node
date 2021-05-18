@@ -10,8 +10,8 @@ const userinfo = fs.readFileSync('userinfo.txt');
 jose.JWK.asKey(jwkPrivate).
   then(function (key) {
     // show key as json
-    // output = result.toJSON(true);
-    output = result.toJSON();
+    // output = key.toJSON(true);
+    output = key.toJSON();
 
     return jose.JWE.createDecrypt(key).
       decrypt(userinfo.toString());
