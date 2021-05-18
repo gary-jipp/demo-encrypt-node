@@ -1,7 +1,7 @@
 const fs = require('fs');
 const NodeRSA = require('node-rsa');
 const jwkToPem = require("jwk-to-pem");
-const { jwkPrivate } = require("./jwks");
+const { jwkPrivate } = require("./jwk");
 
 // Private jwks contains both keys
 console.log("Reading key pair from Private JWKS");

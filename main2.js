@@ -1,9 +1,9 @@
 const fs = require('fs');
 const jose = require('node-jose');
 const jwt_decode = require("jwt-decode");
-const { jwkPrivate } = require("./jwks");
+const { jwkPrivate } = require("./jwk");
 
-// Read emcrypted payload
+// Read encrypted payload
 const userinfo = fs.readFileSync('userinfo.txt');
 // console.log(userinfo.toString());
 
@@ -11,6 +11,7 @@ jose.JWK.asKey(jwkPrivate).
   then(function (key) {
     // show key as json
     // output = result.toJSON(true);
+    output = result.toJSON();
 
     return jose.JWE.createDecrypt(key).
       decrypt(userinfo.toString());
