@@ -21,10 +21,10 @@ const decrypt_jwt = function (jwk, input) {
 
 };
 
-const getPublicJwk = function (jwk) {
+const getJwk = function (jwk, private=false) {
   return jose.JWK.asKey(jwk).
     then(function (key) {
-      return key.toJSON();
+      return key.toJSON(private);
     });
 };
 
@@ -37,4 +37,4 @@ const generateJwk = function () {
     });
 };
 
-module.exports = { decrypt_jwt , generateJwk, getPublicJwk};
+module.exports = { decrypt_jwt , generateJwk, getJwk};
