@@ -1,38 +1,43 @@
 const fs = require('fs');
-const jose = require('node-jose');
-const jwt_decode = require("jwt-decode");
-const { jwk } = require("./jwkPrivate");
+const { decrypt, getKey, createKeyPair } = require('./jwt');
 
-// Read encrypted payload
+// Read encrypted payload (JWT)
 const userinfo = fs.readFileSync('userinfo.txt');
 // console.log(userinfo.toString());
 
-jose.JWK.asKey(jwk).
-  then(function (key) {
-    // show key as json
-    // output = key.toJSON(true);
-    output = key.toJSON();
-    console.log(output);
+// Read base64 jwk keypair
+const text = fs.readFileSync('jwkPrivate.txt', 'utf8');
+// console.log(text);
+const json = Buffer.from(text, 'base64');
+const key = JSON.parse(json);
 
-    return jose.JWE.createDecrypt(key).
-      decrypt(userinfo.toString());
-  })
-  .then(function (result) {
-    // {result} is a Object with:
-    // *  header: the combined 'protected' and 'unprotected' header members
-    // *  protected: an array of the member names from the "protected" member
-    // *  key: Key used to decrypt
-    // *  payload: Buffer of the decrypted content
-    // *  plaintext: Buffer of the decrypted content (alternate)
-    return result.payload.toString();
-    // console.log(result.key);
-    // console.log(result.protected);
-    // console.log(result.plaintext.toString());
-  }).then(token => {
-    // console.log(token);
 
-    const decoded = jwt_decode(token);
+// Get a JWK with only public key
+getKey(key, false)
+  .then(public => {
+    // console.log(public);
+    let buffer = Buffer.from(JSON.stringify(public), "utf8");
+    // console.log(buffer.toString());
 
+    const base64 = buffer.toString("base64");
+    // console.log("\nkey:\n" +base64);
+    // fs.writeFileSync('./jwk.txt', base64)
+  });
+
+// Get a JWK with both keys
+getKey(key, true)
+  .then(public => {
+    // console.log(public);
+    let buffer = Buffer.from(JSON.stringify(public), "utf8");
+    // console.log(buffer.toString());
+
+    const base64 = buffer.toString("base64");
+    // console.log("\nkey:\n" +base64);
+  });
+
+// Decrypt userInfo JWT
+decrypt(key, userinfo)
+  .then(decoded => {
+    console.log("\nDecoded data");
     console.log(decoded);
-    console.log(decoded.given_name);
   });
