@@ -1,8 +1,8 @@
 const jose = require('node-jose');
 const jwt_decode = require("jwt-decode");
 
-//  Return a Promise
-const decrypt_jwt = function (jwk, input) {
+//  Returns a Promise
+const decrypt = function (jwk, input) {
 
   return jose.JWK.asKey(jwk).
     then(function (key) {
@@ -14,21 +14,19 @@ const decrypt_jwt = function (jwk, input) {
     })
     .then(token => {
       // console.log(token);
-
       const decoded = jwt_decode(token);
       return decoded;
     });
-
 };
 
-const getJwk = function (jwk, private=false) {
+const getKey = function (jwk, private = false) {
   return jose.JWK.asKey(jwk).
     then(function (key) {
       return key.toJSON(private);
     });
 };
 
-const generateJwk = function () {
+const createKeyPair = function () {
 
   const keyStore = jose.JWK.createKeyStore();
   keyStore.generate('RSA', 2048, { alg: 'RS256', use: 'sig' })
@@ -37,4 +35,4 @@ const generateJwk = function () {
     });
 };
 
-module.exports = { decrypt_jwt , generateJwk, getJwk};
+module.exports = { decrypt, createKeyPair, getKey };
