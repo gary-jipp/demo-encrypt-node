@@ -41,3 +41,8 @@ decrypt(key, userinfo)
     console.log("\nDecoded data");
     console.log(decoded);
   });
+
+// Create a new Keypair  
+const newKey = createKeyPair();
+console.log(key);
+
