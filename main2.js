@@ -1,8 +1,6 @@
 const fs = require('fs');
 const { decrypt, getKey, createKeyPair } = require('./jwt');
 
-const args = 
-
 // Read encrypted payload (JWT)
 const userinfo = fs.readFileSync('userinfo.txt');
 // console.log(userinfo.toString());
